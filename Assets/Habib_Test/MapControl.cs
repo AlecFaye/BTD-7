@@ -3,7 +3,8 @@ using UnityEngine;
 public class MapControl : MonoBehaviour
 {
     // Have the spline be the implementation
-    // Have the splined object to create the polygon, potentially use a method to create the curve without 
+    // Have the splined object to create the polygon, potentially use a method to create the curve once and turn it into a proper polygon
+    // 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
