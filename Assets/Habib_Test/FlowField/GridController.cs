@@ -35,12 +35,16 @@ public class GridController : MonoBehaviour
         curFlowfield.CreateCostField();
 
         Vector2 target;
-        target.x = destinationTarget.position.x;
-        target.y = destinationTarget.position.y;
+        target.x = destinationTarget.position.x - CreationCorner.position.x;
+        target.y = destinationTarget.position.y - CreationCorner.position.y;
+
+        // Vector2 cornerOffset;
+        // cornerOffset.x =;
+        // cornerOffset.y = CreationCorner.position.y;
         
         var destinationCell = curFlowfield.GetCellFromWorldPos(target);
         
-        //Debug.Log(destinationCell.worldPos);
         curFlowfield.CreateIntegrationField(destinationCell);
+        curFlowfield.CreateCostField();
     }
 }

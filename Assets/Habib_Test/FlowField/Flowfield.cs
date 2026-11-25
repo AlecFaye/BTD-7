@@ -86,13 +86,32 @@ public class Flowfield
 
                 if (curNeighbor.cost + curCell.bestCost < curNeighbor.bestCost)
                 {
-                    curCell.bestCost = (ushort)(curNeighbor.cost + curCell.bestCost);
+                    curNeighbor.bestCost = (ushort)(curNeighbor.cost + curCell.bestCost);
                     cellsToCheck.Enqueue(curNeighbor);
                 }
             }
         }
     }
 
+    public void CreateFlowfield()
+    {
+        foreach (var curCell in grid)
+        {
+            var neighbors = GetNeighborCells(curCell.gridIndex, GridDirection.CardinalDirections);
+            
+            var bestCost = curCell.bestCost;
+
+            foreach (var curNeighbor in neighbors)
+            {
+                if (curNeighbor.bestCost < bestCost)
+                {
+                    bestCost = curNeighbor.bestCost;
+                    curCell.bestDirection = GridDirection.GetDirectionFromV2I(curNeighbor.gridIndex - curCell.gridIndex); // Grab the best direction from a Vector 2 Int
+                }
+            }
+        }
+    }
+    
     private List<Cell> GetNeighborCells(Vector2Int _gridIndex, List<GridDirection> _directions)
     {
         var neighborCells = new List<Cell>();
@@ -126,12 +145,20 @@ public class Flowfield
     {
         var percentX = _worldPos.x / (gridSize.x * cellDiameter);
         var percentY = _worldPos.y / (gridSize.y * cellDiameter);
-
+        
+        Debug.Log(_worldPos.x + " / (" + gridSize.x +  " * " + cellDiameter + ")");
+        
+        Debug.Log(percentX + ", " + percentY);
+        
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
         
+        Debug.Log(percentX + ", " + percentY);
+        
         var x = Mathf.Clamp(Mathf.FloorToInt(percentX * gridSize.x), 0, gridSize.x - 1);
         var y = Mathf.Clamp(Mathf.FloorToInt(percentY * gridSize.y), 0, gridSize.y - 1);
+        
+        Debug.Log(x + ", " + y);
         
         return grid[x, y];
     }
