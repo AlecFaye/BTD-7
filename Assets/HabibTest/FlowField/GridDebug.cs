@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
  
@@ -15,13 +16,13 @@ public class GridDebug : MonoBehaviour
     private float cellRadius;
     private Flowfield curFlowField;
  
-    private Sprite[] ffIcons;
- 
+    [SerializeField] private Sprite[] ffIcons;
+
     private void Start()
     {
-        ffIcons = Resources.LoadAll<Sprite>("Sprites/FFicons");
+        Debug.Log($"Loaded {ffIcons.Length} flow field sprites.");
     }
- 
+
     public void SetFlowField(Flowfield newFlowField)
     {
         curFlowField = newFlowField;
@@ -38,11 +39,9 @@ public class GridDebug : MonoBehaviour
             case FlowFieldDisplayType.AllIcons:
                 DisplayAllCells();
                 break;
-            
             case FlowFieldDisplayType.DestinationIcon:
                 DisplayDestinationCell();
                 break;
- 
             default:
                 break;
         }

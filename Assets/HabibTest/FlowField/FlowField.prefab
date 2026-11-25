@@ -96,6 +96,11 @@ MonoBehaviour:
   gridController: {fileID: 8708894631420581964}
   displayGrid: 1
   curDisplayType: 1
+  ffIcons:
+  - {fileID: 21300000, guid: a4cafcc3efaa7c84485e2f32e9b6e3f5, type: 3}
+  - {fileID: 21300000, guid: 5d48c285a22035c4dbd010b803eea28d, type: 3}
+  - {fileID: 21300000, guid: f2ec0b714a6ca9e43add2dc4e87c54c5, type: 3}
+  - {fileID: 21300000, guid: 1f2aabaadae9aa747a40e35aff64a48c, type: 3}
 --- !u!1 &6627027796165067662
 GameObject:
   m_ObjectHideFlags: 0

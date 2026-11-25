@@ -45,6 +45,8 @@ public class GridController : MonoBehaviour
         var destinationCell = curFlowfield.GetCellFromWorldPos(target);
         
         curFlowfield.CreateIntegrationField(destinationCell);
+        
         curFlowfield.CreateCostField();
+        gridDebug.DrawFlowField();
     }
 }

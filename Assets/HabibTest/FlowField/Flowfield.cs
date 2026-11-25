@@ -146,19 +146,11 @@ public class Flowfield
         var percentX = _worldPos.x / (gridSize.x * cellDiameter);
         var percentY = _worldPos.y / (gridSize.y * cellDiameter);
         
-        Debug.Log(_worldPos.x + " / (" + gridSize.x +  " * " + cellDiameter + ")");
-        
-        Debug.Log(percentX + ", " + percentY);
-        
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
         
-        Debug.Log(percentX + ", " + percentY);
-        
         var x = Mathf.Clamp(Mathf.FloorToInt(percentX * gridSize.x), 0, gridSize.x - 1);
         var y = Mathf.Clamp(Mathf.FloorToInt(percentY * gridSize.y), 0, gridSize.y - 1);
-        
-        Debug.Log(x + ", " + y);
         
         return grid[x, y];
     }
