@@ -6,17 +6,20 @@ public class Cell
     public Vector3 worldPos;
     public Vector2Int gridIndex;
     public byte cost;
-
-    public Cell(Vector3 worldPos, Vector2Int gridIndex)
+    public ushort bestCost;
+    
+    public Cell(Vector3 _worldPos, Vector2Int _gridIndex)
     {
-        this.worldPos = worldPos;
-        this.gridIndex = gridIndex;
+        worldPos = _worldPos;
+        gridIndex = _gridIndex;
+        cost = 1;
+        bestCost = ushort.MaxValue; // Set to the highest value, so that a lower value can overwrite it
     }
 
-    public void IncreaseCost(int amount)
+    public void IncreaseCost(int _amount)
     {
         if (cost == byte.MaxValue) { return; }
-        if (amount + cost >= byte.MaxValue) { cost = byte.MaxValue; }
-        else { cost += (byte)amount; }
+        if (_amount + cost >= byte.MaxValue) { cost = byte.MaxValue; }
+        else { cost += (byte)_amount; }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,14 +10,14 @@ public class Flowfield
     public Cell[,] grid { get; private set; }
     public Vector2Int gridSize { get; private set; }
     public float cellRadius { get; private set; }
-    
+    public Cell destinationCell;
     private float cellDiameter;
 
-    public Flowfield(float cellRadius, Vector2Int gridSize)
+    public Flowfield(float _cellRadius, Vector2Int _gridSize)
     {
-        this.cellRadius = cellRadius;
-        this.cellDiameter = cellRadius * 2;
-        this.gridSize = gridSize;
+        cellRadius = _cellRadius;
+        cellDiameter = _cellRadius * 2;
+        gridSize = _gridSize;
     }
 
     public void CreateGrid()
@@ -34,6 +35,7 @@ public class Flowfield
         }
     }
 
+    // This method will create set the cost of moving into each cell.
     public void CreateCostField()
     {
         var cellHalfExtents = Vector3.one * cellRadius;
@@ -54,11 +56,83 @@ public class Flowfield
                     cell.IncreaseCost(10); // costs 10 more to move through rough terrain
                     hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
                 }
-                else if (obstacle.gameObject.layer == 10)
+                else if (obstacle.gameObject.layer == 10) // TODO: Implement a system to have path cost less when going through
                 {
                     // Debug.Log("Path");
                 }
             }
         }
+    }
+
+    public void CreateIntegrationField(Cell _destinationCell)
+    {
+        destinationCell = _destinationCell;
+
+        destinationCell.cost = 0;
+        destinationCell.bestCost = 0;
+        
+        var cellsToCheck = new Queue<Cell>();
+        
+        cellsToCheck.Enqueue(_destinationCell);
+        
+        while (cellsToCheck.Count > 0)
+        {
+            var curCell = cellsToCheck.Dequeue();
+            var curNeighbors = GetNeighborCells(curCell.gridIndex, GridDirection.CardinalDirections);
+
+            foreach (var curNeighbor in curNeighbors)
+            {
+                if (curNeighbor.cost == byte.MaxValue) { continue; } // If the neighboring cell is impassable, ignore it
+
+                if (curNeighbor.cost + curCell.cost < curNeighbor.bestCost)
+                {
+                    curCell.bestCost = (ushort)(curNeighbor.cost + curCell.cost);
+                    cellsToCheck.Enqueue(curNeighbor);
+                }
+            }
+        }
+    }
+
+    private List<Cell> GetNeighborCells(Vector2Int _gridIndex, List<GridDirection> _directions)
+    {
+        var neighborCells = new List<Cell>();
+
+        foreach (Vector2Int curDirection in _directions)
+        {
+            var newNeighbor = GetCellAtRelativePos(_gridIndex, curDirection);
+
+            if (newNeighbor != null)
+            {
+                neighborCells.Add(newNeighbor);
+            }
+        }
+        
+        return neighborCells;
+    }
+
+    private Cell GetCellAtRelativePos(Vector2Int _originPos, Vector2Int _relativePos)
+    {
+        var cellPos = _originPos + _relativePos;
+
+        if (cellPos.x < 0 || cellPos.x >= gridSize.x || cellPos.y < 0 || cellPos.y >= gridSize.y)
+        {
+            return null;
+        }
+        
+        return grid[cellPos.x, cellPos.y];
+    }
+
+    public Cell GetCellFromWorldPos(Vector2 _worldPos)
+    {
+        var percentX = _worldPos.x / (gridSize.x * cellDiameter);
+        var percentY = _worldPos.y / (gridSize.y * cellDiameter);
+
+        percentX = Mathf.Clamp01(percentX);
+        percentY = Mathf.Clamp01(percentY);
+        
+        var x = Mathf.Clamp(Mathf.FloorToInt(percentX * gridSize.x), 0, gridSize.x - 1);
+        var y = Mathf.Clamp(Mathf.FloorToInt(percentY * gridSize.y), 0, gridSize.y - 1);
+        
+        return grid[x, y];
     }
 }

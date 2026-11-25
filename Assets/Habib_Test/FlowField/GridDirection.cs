@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
  
-// HK - This script just controls the directions for the cells
+// HK - This script just holds the vector direction values for the different cardinal & intercardinal directions { North, South, East, West & NorthEast, NorthWest, SouthEast, SouthWest }
 
 public class GridDirection
 {

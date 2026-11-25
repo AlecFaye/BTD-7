@@ -13,7 +13,7 @@ public class GridDebug : MonoBehaviour
  
     private Vector2Int gridSize;
     private float cellRadius;
-    private Flowfield _curFlowfield;
+    private Flowfield curFlowField;
  
     private Sprite[] ffIcons;
  
@@ -22,32 +22,32 @@ public class GridDebug : MonoBehaviour
         ffIcons = Resources.LoadAll<Sprite>("Sprites/FFicons");
     }
  
-    public void SetFlowField(Flowfield newFlowfield)
+    public void SetFlowField(Flowfield newFlowField)
     {
-        _curFlowfield = newFlowfield;
-        cellRadius = newFlowfield.cellRadius;
-        gridSize = newFlowfield.gridSize;
+        curFlowField = newFlowField;
+        cellRadius = newFlowField.cellRadius;
+        gridSize = newFlowField.gridSize;
     }
     
-    // public void DrawFlowField()
-    // {
-    //     ClearCellDisplay();
-    //
-    //     switch (curDisplayType)
-    //     {
-    //         case FlowFieldDisplayType.AllIcons:
-    //             DisplayAllCells();
-    //             break;
-    //
-    //         case FlowFieldDisplayType.DestinationIcon:
-    //             DisplayDestinationCell();
-    //             break;
-    //
-    //         default:
-    //             break;
-    //     }
-    // }
-    //
+    public void DrawFlowField()
+    {
+        ClearCellDisplay();
+ 
+        switch (curDisplayType)
+        {
+            // case FlowFieldDisplayType.AllIcons:
+            //     DisplayAllCells();
+            //     break;
+            //
+            // case FlowFieldDisplayType.DestinationIcon:
+            //     DisplayDestinationCell();
+            //     break;
+ 
+            default:
+                break;
+        }
+    }
+ 
     // private void DisplayAllCells()
     // {
     //     if (curFlowField == null) { return; }
@@ -56,7 +56,7 @@ public class GridDebug : MonoBehaviour
     //         DisplayCell(curCell);
     //     }
     // }
-    //
+ 
     // private void DisplayDestinationCell()
     // {
     //     if (curFlowField == null) { return; }
@@ -135,7 +135,7 @@ public class GridDebug : MonoBehaviour
     //         iconSR.sprite = ffIcons[0];
     //     }
     // }
-    
+    //
     public void ClearCellDisplay()
     {
         foreach (Transform t in transform)
@@ -148,7 +148,7 @@ public class GridDebug : MonoBehaviour
     {
         if (displayGrid)
         {
-            if (_curFlowfield == null)
+            if (curFlowField == null)
             {
                 DrawGrid(gridController.gridSize, Color.yellow, gridController.cellRadius);
             }
@@ -158,28 +158,28 @@ public class GridDebug : MonoBehaviour
             }
         }
         
-        if (_curFlowfield == null) { return; }
-        
+        if (curFlowField == null) { return; }
+ 
         GUIStyle style = new GUIStyle(GUI.skin.label);
         style.alignment = TextAnchor.MiddleCenter;
-    
+ 
         switch (curDisplayType)
         {
             case FlowFieldDisplayType.CostField:
-        
-                foreach (Cell curCell in _curFlowfield.grid)
+ 
+                foreach (Cell curCell in curFlowField.grid)
                 {
                     Handles.Label(curCell.worldPos, curCell.cost.ToString(), style);
                 }
                 break;
                 
-            // case FlowFieldDisplayType.IntegrationField:
-            //
-            //     foreach (Cell curCell in curFlowField.grid)
-            //     {
-            //         Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
-            //     }
-            //     break;
+            case FlowFieldDisplayType.IntegrationField:
+ 
+                foreach (Cell curCell in curFlowField.grid)
+                {
+                    Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
+                }
+                break;
                 
             default:
                 break;
@@ -190,12 +190,12 @@ public class GridDebug : MonoBehaviour
     private void DrawGrid(Vector2Int drawGridSize, Color drawColor, float drawCellRadius)
     {
         Gizmos.color = drawColor;
-        for (var x = 0; x < drawGridSize.x; x++)
+        for (int x = 0; x < drawGridSize.x; x++)
         {
-            for (var y = 0; y < drawGridSize.y; y++)
+            for (int y = 0; y < drawGridSize.y; y++)
             {
-                var center = new Vector2(drawCellRadius * 2 * x + drawCellRadius, drawCellRadius * 2 * y + drawCellRadius);
-                var size = Vector2.one * drawCellRadius * 2;
+                Vector3 center = new Vector3(drawCellRadius * 2 * x + drawCellRadius - 10, drawCellRadius * 2 * y + drawCellRadius - 5);
+                Vector3 size = Vector3.one * drawCellRadius * 2;
                 Gizmos.DrawWireCube(center, size);
             }
         }
