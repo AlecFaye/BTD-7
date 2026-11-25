@@ -27,8 +27,8 @@ public class Flowfield
         {
             for (var y = 0; y < gridSize.y; y++)
             {
-                var worldPos = new Vector2(x * cellDiameter + cellRadius, y * cellDiameter + cellRadius); // TODO: Move the creation start point to the bottom left of the screen
-                
+                var worldPos = new Vector2(x * cellDiameter + cellRadius - 10, y * cellDiameter + cellRadius - 5); // TODO: Make it so that the moving is automatically calculated, Maybe use the transform as the anchor
+
                 grid[x, y] = new Cell(worldPos, new Vector2Int(x, y));
             }
         }

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
  
+// HK - This script just controls the directions for the cells
+
 public class GridDirection
 {
     public readonly Vector2Int Vector;

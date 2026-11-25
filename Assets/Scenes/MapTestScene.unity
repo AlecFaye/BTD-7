@@ -5182,11 +5182,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 487238554763147095, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 487238554763147095, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 487238554763147095, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5220,21 +5220,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3886053954614624059, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
+      propertyPath: displayGrid
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3886053954614624059, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
+      propertyPath: curDisplayType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6627027796165067662, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: m_Name
       value: FlowField
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: cellRadius
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.x
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.y
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
