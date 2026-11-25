@@ -56,7 +56,7 @@ public class GridDebug : MonoBehaviour
     //         DisplayCell(curCell);
     //     }
     // }
- 
+    //
     // private void DisplayDestinationCell()
     // {
     //     if (curFlowField == null) { return; }
@@ -135,15 +135,15 @@ public class GridDebug : MonoBehaviour
     //         iconSR.sprite = ffIcons[0];
     //     }
     // }
-    //
-    // public void ClearCellDisplay()
-    // {
-    //     foreach (Transform t in transform)
-    //     {
-    //         GameObject.Destroy(t.gameObject);
-    //     }
-    // }
-    //
+    
+    public void ClearCellDisplay()
+    {
+        foreach (Transform t in transform)
+        {
+            GameObject.Destroy(t.gameObject);
+        }
+    }
+    
     private void OnDrawGizmos()
     {
         if (displayGrid)
@@ -158,7 +158,7 @@ public class GridDebug : MonoBehaviour
             }
         }
         
-        if (curFlowField == null) { return; }
+        if (_curFlowfield == null) { return; }
         
         GUIStyle style = new GUIStyle(GUI.skin.label);
         style.alignment = TextAnchor.MiddleCenter;
@@ -167,19 +167,19 @@ public class GridDebug : MonoBehaviour
         {
             case FlowFieldDisplayType.CostField:
         
-                foreach (Cell curCell in curFlowField.grid)
+                foreach (Cell curCell in _curFlowfield.grid)
                 {
                     Handles.Label(curCell.worldPos, curCell.cost.ToString(), style);
                 }
                 break;
                 
-            case FlowFieldDisplayType.IntegrationField:
-        
-                foreach (Cell curCell in curFlowField.grid)
-                {
-                    Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
-                }
-                break;
+            // case FlowFieldDisplayType.IntegrationField:
+            //
+            //     foreach (Cell curCell in curFlowField.grid)
+            //     {
+            //         Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
+            //     }
+            //     break;
                 
             default:
                 break;

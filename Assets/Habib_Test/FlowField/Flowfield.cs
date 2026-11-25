@@ -27,7 +27,7 @@ public class Flowfield
         {
             for (var y = 0; y < gridSize.y; y++)
             {
-                var worldPos = new Vector2(x * cellDiameter + cellRadius, y * cellDiameter + cellRadius);
+                var worldPos = new Vector2(x * cellDiameter + cellRadius, y * cellDiameter + cellRadius); // TODO: Move the creation start point to the bottom left of the screen
                 
                 grid[x, y] = new Cell(worldPos, new Vector2Int(x, y));
             }
@@ -56,7 +56,7 @@ public class Flowfield
                 }
                 else if (obstacle.gameObject.layer == 10)
                 {
-                    Debug.Log("Path");
+                    // Debug.Log("Path");
                 }
             }
         }
