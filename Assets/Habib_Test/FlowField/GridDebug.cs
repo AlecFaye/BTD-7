@@ -12,7 +12,6 @@ public class GridDebug : MonoBehaviour
     public FlowFieldDisplayType curDisplayType;
  
     private Vector2Int gridSize;
-    public Vector2Int GridSize;
     private float cellRadius;
     private Flowfield _curFlowfield;
  
@@ -158,40 +157,38 @@ public class GridDebug : MonoBehaviour
                 DrawGrid(gridSize, Color.green, cellRadius);
             }
         }
-        //
-        // if (curFlowField == null) { return; }
-        //
-        // GUIStyle style = new GUIStyle(GUI.skin.label);
-        // style.alignment = TextAnchor.MiddleCenter;
+        
+        if (curFlowField == null) { return; }
+        
+        GUIStyle style = new GUIStyle(GUI.skin.label);
+        style.alignment = TextAnchor.MiddleCenter;
     
-        // switch (curDisplayType)
-        // {
-        //     case FlowFieldDisplayType.CostField:
-        //
-        //         foreach (Cell curCell in curFlowField.grid)
-        //         {
-        //             Handles.Label(curCell.worldPos, curCell.cost.ToString(), style);
-        //         }
-        //         break;
-        //         
-        //     case FlowFieldDisplayType.IntegrationField:
-        //
-        //         foreach (Cell curCell in curFlowField.grid)
-        //         {
-        //             Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
-        //         }
-        //         break;
-        //         
-        //     default:
-        //         break;
-        // }
+        switch (curDisplayType)
+        {
+            case FlowFieldDisplayType.CostField:
+        
+                foreach (Cell curCell in curFlowField.grid)
+                {
+                    Handles.Label(curCell.worldPos, curCell.cost.ToString(), style);
+                }
+                break;
+                
+            case FlowFieldDisplayType.IntegrationField:
+        
+                foreach (Cell curCell in curFlowField.grid)
+                {
+                    Handles.Label(curCell.worldPos, curCell.bestCost.ToString(), style);
+                }
+                break;
+                
+            default:
+                break;
+        }
         
     }
  
     private void DrawGrid(Vector2Int drawGridSize, Color drawColor, float drawCellRadius)
     {
-        
-        GridSize = drawGridSize;
         Gizmos.color = drawColor;
         for (var x = 0; x < drawGridSize.x; x++)
         {

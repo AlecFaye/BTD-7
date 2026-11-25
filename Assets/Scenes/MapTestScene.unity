@@ -533,38 +533,6 @@ Transform:
   - {fileID: 613212688}
   m_Father: {fileID: 935243540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &161487309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3645787453641236950, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
-  m_PrefabInstance: {fileID: 2413260357761384258}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &161487311 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
-  m_PrefabInstance: {fileID: 2413260357761384258}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161487309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04fa3ea808c0a4f439ef1e36e683b3d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GridController
---- !u!114 &161487312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161487309}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d2343319c4d8094abcad6b277532d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GridDebug
-  gridController: {fileID: 161487311}
-  displayGrid: 1
-  curDisplayType: 0
-  GridSize: {x: 9, y: 5}
 --- !u!1001 &264293137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5262,19 +5230,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.x
-      value: 9
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.y
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3645787453641236950, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 161487312}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

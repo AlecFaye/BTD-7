@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -31,5 +32,33 @@ public class Flowfield
                 grid[x, y] = new Cell(worldPos, new Vector2Int(x, y));
             }
         }
-    } 
+    }
+
+    public void CreateCostField()
+    {
+        var cellHalfExtents = Vector3.one * cellRadius;
+        var terrainMask = LayerMask.GetMask("Impassible", "RoughTerrain", "MainPath"); // 8, 9, 10
+
+        foreach (var cell in grid)
+        {
+            var obstacles = Physics.OverlapBox(cell.worldPos, cellHalfExtents, Quaternion.identity, terrainMask);
+            var hasIncreasedCost = false;
+            foreach (var obstacle in obstacles)
+            {
+                if (obstacle.gameObject.layer == 8) // If the obstacle is impassable, deny any movement
+                {
+                    cell.IncreaseCost(byte.MaxValue);
+                }
+                else if (!hasIncreasedCost && obstacle.gameObject.layer == 9) // If the obstacle is Rough Terrain, add a cost to movement
+                {
+                    cell.IncreaseCost(10); // costs 10 more to move through rough terrain
+                    hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
+                }
+                else if (obstacle.gameObject.layer == 10)
+                {
+                    Debug.Log("Path");
+                }
+            }
+        }
+    }
 }

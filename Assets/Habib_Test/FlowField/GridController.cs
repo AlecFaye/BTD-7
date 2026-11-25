@@ -15,6 +15,7 @@ public class GridController : MonoBehaviour
     private void Start()
     {
         InitializeFlowField();
+        CurFlowfield.CreateCostField();
     }
     
     private void Update()

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6449983201096833603}
   - component: {fileID: 8708894631420581964}
+  - component: {fileID: 3886053954614624059}
   m_Layer: 0
   m_Name: GridController
   m_TagString: Untagged
@@ -44,9 +45,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fa3ea808c0a4f439ef1e36e683b3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridController
-  gridSize: {x: 0, y: 0, z: 0}
+  gridSize: {x: 0, y: 0}
   cellRadius: 0.5
-  curFlowField: 0
+--- !u!114 &3886053954614624059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3645787453641236950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d2343319c4d8094abcad6b277532d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridDebug
+  gridController: {fileID: 8708894631420581964}
+  displayGrid: 1
+  curDisplayType: 0
+  GridSize: {x: 20, y: 10}
 --- !u!1 &6627027796165067662
 GameObject:
   m_ObjectHideFlags: 0
