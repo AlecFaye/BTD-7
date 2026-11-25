@@ -6,34 +6,41 @@ public class GridController : MonoBehaviour
 {
     [Header("Test Targets")]
     [SerializeField] private Transform destinationTarget;
+    [SerializeField] private GridDebug gridDebug;
     
     [Header("Flowfield Grid Variables")]
+    public Transform CreationCorner;
     public Vector2Int gridSize;
     public float cellRadius = 0.5f;
-    public Flowfield CurFlowfield;
+    public Flowfield curFlowfield;
+    
+    
 
     private void InitializeFlowField()
     {
-        CurFlowfield = new Flowfield(cellRadius, gridSize);
-        CurFlowfield.CreateGrid();
-    }
+        curFlowfield = new Flowfield(cellRadius, gridSize);
 
-    private void Update()
-    {
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     InitializeFlowField();
-        // }
+        Vector2 cornerTarget;
+        cornerTarget.x = CreationCorner.position.x;
+        cornerTarget.y = CreationCorner.position.y;
+        
+        curFlowfield.CreateGrid(cornerTarget);
+        
+        gridDebug.SetFlowField(curFlowfield);
     }
 
     public void TestCreateFlowfield()
     {
         InitializeFlowField();
-        CurFlowfield.CreateCostField();
+        curFlowfield.CreateCostField();
 
-        var target = new Vector2(destinationTarget.position.x, destinationTarget.position.y); // TODO: Adjust this to be less jank
+        Vector2 target;
+        target.x = destinationTarget.position.x;
+        target.y = destinationTarget.position.y;
         
-        var destinationCell = CurFlowfield.GetCellFromWorldPos(target);
-        CurFlowfield.CreateIntegrationField(destinationCell);
+        var destinationCell = curFlowfield.GetCellFromWorldPos(target);
+        
+        //Debug.Log(destinationCell.worldPos);
+        curFlowfield.CreateIntegrationField(destinationCell);
     }
 }

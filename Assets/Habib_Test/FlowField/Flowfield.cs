@@ -20,7 +20,7 @@ public class Flowfield
         gridSize = _gridSize;
     }
 
-    public void CreateGrid()
+    public void CreateGrid(Vector2 _cornerTarget)
     {
         grid = new Cell[gridSize.x, gridSize.y];
 
@@ -28,7 +28,7 @@ public class Flowfield
         {
             for (var y = 0; y < gridSize.y; y++)
             {
-                var worldPos = new Vector2(x * cellDiameter + cellRadius - 10, y * cellDiameter + cellRadius - 5); // TODO: Make it so that the moving is automatically calculated, Maybe use the transform as the anchor
+                var worldPos = new Vector2(x * cellDiameter + cellRadius + _cornerTarget.x, y * cellDiameter + cellRadius + _cornerTarget.y);
 
                 grid[x, y] = new Cell(worldPos, new Vector2Int(x, y));
             }
@@ -73,20 +73,20 @@ public class Flowfield
         
         var cellsToCheck = new Queue<Cell>();
         
-        cellsToCheck.Enqueue(_destinationCell);
+        cellsToCheck.Enqueue(destinationCell);
         
         while (cellsToCheck.Count > 0)
         {
             var curCell = cellsToCheck.Dequeue();
-            var curNeighbors = GetNeighborCells(curCell.gridIndex, GridDirection.CardinalDirections);
+            var neighbors = GetNeighborCells(curCell.gridIndex, GridDirection.CardinalDirections);
 
-            foreach (var curNeighbor in curNeighbors)
+            foreach (var curNeighbor in neighbors)
             {
                 if (curNeighbor.cost == byte.MaxValue) { continue; } // If the neighboring cell is impassable, ignore it
 
-                if (curNeighbor.cost + curCell.cost < curNeighbor.bestCost)
+                if (curNeighbor.cost + curCell.bestCost < curNeighbor.bestCost)
                 {
-                    curCell.bestCost = (ushort)(curNeighbor.cost + curCell.cost);
+                    curCell.bestCost = (ushort)(curNeighbor.cost + curCell.bestCost);
                     cellsToCheck.Enqueue(curNeighbor);
                 }
             }

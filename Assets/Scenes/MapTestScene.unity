@@ -5745,21 +5745,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 802670401987331173, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 802670401987331173, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 3635816641877755844, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.773
+      value: 9.7
       objectReference: {fileID: 0}
     - target: {fileID: 3635816641877755844, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.212
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886053954614624059, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
-      propertyPath: displayGrid
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3886053954614624059, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
-      propertyPath: curDisplayType
-      value: 0
+      value: 1.22
       objectReference: {fileID: 0}
     - target: {fileID: 6627027796165067662, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: m_Name

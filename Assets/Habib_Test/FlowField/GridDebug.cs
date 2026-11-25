@@ -194,7 +194,7 @@ public class GridDebug : MonoBehaviour
         {
             for (int y = 0; y < drawGridSize.y; y++)
             {
-                Vector3 center = new Vector3(drawCellRadius * 2 * x + drawCellRadius - 10, drawCellRadius * 2 * y + drawCellRadius - 5);
+                Vector3 center = new Vector3(drawCellRadius * 2 * x + drawCellRadius + gridController.CreationCorner.position.x, drawCellRadius * 2 * y + drawCellRadius + gridController.CreationCorner.position.y);
                 Vector3 size = Vector3.one * drawCellRadius * 2;
                 Gizmos.DrawWireCube(center, size);
             }
