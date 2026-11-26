@@ -5,6 +5,8 @@ using UnityEngine;
 
 // HK - This script will control the Flowfield
 // Requires - Cell.cs
+// Guide: https://www.youtube.com/watch?v=tSe6ZqDKB0Y
+
 public class Flowfield
 {
     public Cell[,] grid { get; private set; }
