@@ -37,10 +37,6 @@ public class GridController : MonoBehaviour
         Vector2 target;
         target.x = destinationTarget.position.x - CreationCorner.position.x;
         target.y = destinationTarget.position.y - CreationCorner.position.y;
-
-        // Vector2 cornerOffset;
-        // cornerOffset.x =;
-        // cornerOffset.y = CreationCorner.position.y;
         
         var destinationCell = curFlowfield.GetCellFromWorldPos(target);
         

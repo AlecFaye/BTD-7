@@ -16,25 +16,12 @@ public class EnemyController : MonoBehaviour
         unitsInGame = new List<GameObject>();
     }
  
-    // void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Alpha1))
-    //     {
-    //         SpawnUnits();
-    //     }
-    //
-    //     if (Input.GetKeyDown(KeyCode.Alpha2))
-    //     {
-    //         DestroyUnits();
-    //     }
-    // }
- 
     private void FixedUpdate()
     {
         if (gridController.curFlowfield == null) { return; }
-        foreach (GameObject unit in unitsInGame)
+        foreach (var unit in unitsInGame)
         {
-            var cellBelow = gridController.curFlowfield.GetCellFromWorldPos(unit.transform.position);
+            var cellBelow = gridController.curFlowfield.GetCellFromWorldPos(unit.transform.position - gridController.CreationCorner.position);
             var moveDirection = new Vector2(cellBelow.bestDirection.x, cellBelow.bestDirection.y);
             var unitRB = unit.GetComponent<Rigidbody2D>();
             unitRB.linearVelocity = moveDirection * moveSpeed;
@@ -65,7 +52,7 @@ public class EnemyController : MonoBehaviour
             unitsInGame.Add(newUnit);
             do
             {
-                newPos = new Vector2(Random.Range(0, maxSpawnPos.x), Random.Range(0, maxSpawnPos.y));
+                newPos = new Vector2(Random.Range(-maxSpawnPos.x, maxSpawnPos.x), Random.Range(-maxSpawnPos.y, maxSpawnPos.y));
                 newUnit.transform.position = newPos;
             }
             while (Physics.OverlapSphere(newPos, 0.25f, colMask).Length > 0);

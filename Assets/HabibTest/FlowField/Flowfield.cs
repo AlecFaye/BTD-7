@@ -11,6 +11,7 @@ public class Flowfield
     public Vector2Int gridSize { get; private set; }
     public float cellRadius { get; private set; }
     public Cell destinationCell;
+    
     private float cellDiameter;
 
     public Flowfield(float _cellRadius, Vector2Int _gridSize)
