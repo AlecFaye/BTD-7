@@ -18,11 +18,6 @@ public class GridDebug : MonoBehaviour
  
     [SerializeField] private Sprite[] ffIcons;
 
-    private void Start()
-    {
-        Debug.Log($"Loaded {ffIcons.Length} flow field sprites.");
-    }
-
     public void SetFlowField(Flowfield newFlowField)
     {
         curFlowField = newFlowField;
@@ -68,7 +63,7 @@ public class GridDebug : MonoBehaviour
         SpriteRenderer iconSR = iconGO.AddComponent<SpriteRenderer>();
         iconGO.transform.parent = transform;
         iconGO.transform.position = cell.worldPos;
-    
+        
         if (cell.cost == 0)
         {
             iconSR.sprite = ffIcons[3];
