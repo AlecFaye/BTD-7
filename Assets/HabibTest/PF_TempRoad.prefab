@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 123758686714422325}
   - component: {fileID: 4629429753120465542}
   m_Layer: 0
-  m_Name: PF_Temp_Road
+  m_Name: PF_TempRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
