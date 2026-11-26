@@ -42,40 +42,48 @@ public class Flowfield
         var cellHalfExtents = Vector3.one * cellRadius;
         var terrainMask = LayerMask.GetMask("Impassible", "RoughTerrain", "MainPath"); // 8, 9, 10
 
-        foreach (var cell in grid)
+        var pathCells = new List<Cell>();
+        
+        foreach (var curCell in grid)
         {
-            var obstacles = Physics.OverlapBox(cell.worldPos, cellHalfExtents, Quaternion.identity, terrainMask);
+            var obstacles = Physics.OverlapBox(curCell.worldPos, cellHalfExtents, Quaternion.identity, terrainMask);
             var hasIncreasedCost = false;
+            
             foreach (var obstacle in obstacles)
             {
                 if (obstacle.gameObject.layer == 8) // If the obstacle is impassable, deny any movement
                 {
-                    cell.IncreaseCost(byte.MaxValue);
+                    curCell.IncreaseCost(byte.MaxValue);
                 }
                 else if (!hasIncreasedCost && obstacle.gameObject.layer == 9) // If the obstacle is Rough Terrain, add a cost to movement
                 {
-                    cell.IncreaseCost(10); // costs 10 more to move through rough terrain
+                    curCell.IncreaseCost(10); // costs 10 more to move through rough terrain
                     hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
                 }
-                else if (obstacle.gameObject.layer == 10) // costs 1 if the square is moving through and will ignore any rough terrain
+                else if (obstacle.gameObject.layer == 10)
                 {
-                    var neighbors = GetNeighborCells(cell.gridIndex, GridDirection.AllDirections);
-
-                    var hasRoughNeighbor = false;
-                    
-                    foreach (var curNeighbor in neighbors)
-                    {
-                        if (curNeighbor.cost > 5)
-                        {
-                            hasRoughNeighbor = true;
-                            break;
-                        };
-                    }
-
-                    cell.SetCost(hasRoughNeighbor ? 3 : 1); // If there is rough terrain in the nearby cells, then increase the cost of this tile
-                    hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
+                    pathCells.Add(curCell);
+                    break;
                 }
             }
+        }
+
+        foreach (var curPathCell in pathCells)
+        {
+            var neighbors = GetNeighborCells(curPathCell.gridIndex, GridDirection.AllDirections);
+
+            var hasRoughNeighbor = false;
+                
+            foreach (var curNeighbor in neighbors)
+            {
+                if (curNeighbor.cost > 6)
+                {
+                    hasRoughNeighbor = true;
+                    break;
+                };
+            }
+                
+            curPathCell.SetCost(hasRoughNeighbor ? 5 : 1); // If there is rough terrain in the nearby cells, then increase the cost of this tile
         }
     }
 
