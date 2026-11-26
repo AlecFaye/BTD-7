@@ -57,9 +57,10 @@ public class Flowfield
                     cell.IncreaseCost(10); // costs 10 more to move through rough terrain
                     hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
                 }
-                else if (obstacle.gameObject.layer == 10) // TODO: Implement a system to have path cost less when going through
+                else if (obstacle.gameObject.layer == 10) // costs 1 if the square is moving through and will ignore any roughterrain
                 {
-                    // Debug.Log("Path");
+                    cell.SetCost(1); // costs 10 more to move through rough terrain
+                    hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
                 }
             }
         }
@@ -98,7 +99,7 @@ public class Flowfield
     {
         foreach (var curCell in grid)
         {
-            var neighbors = GetNeighborCells(curCell.gridIndex, GridDirection.CardinalDirections);
+            var neighbors = GetNeighborCells(curCell.gridIndex, GridDirection.AllDirections);
             
             var bestCost = curCell.bestCost;
 

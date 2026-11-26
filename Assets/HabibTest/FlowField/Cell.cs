@@ -23,4 +23,10 @@ public class Cell
         if (_amount + cost >= byte.MaxValue) { cost = byte.MaxValue; }
         else { cost += (byte)_amount; }
     }
+
+    public void SetCost(int _amount)
+    {
+        cost = (byte)_amount;
+        if (cost >= byte.MaxValue) { cost = byte.MaxValue; }
+    }
 }
