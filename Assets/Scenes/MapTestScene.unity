@@ -6766,15 +6766,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: cellRadius
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.x
-      value: 48
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.y
-      value: 28
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
