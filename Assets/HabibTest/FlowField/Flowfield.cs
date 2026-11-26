@@ -57,9 +57,22 @@ public class Flowfield
                     cell.IncreaseCost(10); // costs 10 more to move through rough terrain
                     hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
                 }
-                else if (obstacle.gameObject.layer == 10) // costs 1 if the square is moving through and will ignore any roughterrain
+                else if (obstacle.gameObject.layer == 10) // costs 1 if the square is moving through and will ignore any rough terrain
                 {
-                    cell.SetCost(1); // costs 10 more to move through rough terrain
+                    var neighbors = GetNeighborCells(cell.gridIndex, GridDirection.AllDirections);
+
+                    var hasRoughNeighbor = false;
+                    
+                    foreach (var curNeighbor in neighbors)
+                    {
+                        if (curNeighbor.cost > 5)
+                        {
+                            hasRoughNeighbor = true;
+                            break;
+                        };
+                    }
+
+                    cell.SetCost(hasRoughNeighbor ? 3 : 1); // If there is rough terrain in the nearby cells, then increase the cost of this tile
                     hasIncreasedCost = true; // Added here so the cost doesn't get added again from another piece of overlapping terrain
                 }
             }

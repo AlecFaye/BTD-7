@@ -1854,8 +1854,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TempEnemyController
   gridController: {fileID: 161487311}
   unitPrefab: {fileID: 6619283640394758153, guid: 61a9e7b7251ce1d4396351b0609afe56, type: 3}
-  numUnitsPerSpawn: 100
-  moveSpeed: 2
+  numUnitsPerSpawn: 10
+  moveSpeed: 1.5
   spawnPoint: {fileID: 1141349254}
 --- !u!1001 &605881605
 PrefabInstance:
@@ -4604,8 +4604,9 @@ GameObject:
   - component: {fileID: 1390318925}
   - component: {fileID: 1390318924}
   - component: {fileID: 1390318923}
+  - component: {fileID: 1390318926}
   m_Layer: 0
-  m_Name: Square
+  m_Name: TempEnemyDestroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4731,6 +4732,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1390318926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390318922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981821c364fde634f93adb8455b6ab2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TempEnemyDestroyer
+  boxCollider: {fileID: 0}
 --- !u!1 &1400719290
 GameObject:
   m_ObjectHideFlags: 0
@@ -6752,15 +6766,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: cellRadius
-      value: 0.1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.x
-      value: 120
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 8708894631420581964, guid: aca61e2a9fc01f04088f1a9e4a725132, type: 3}
       propertyPath: gridSize.y
-      value: 70
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
