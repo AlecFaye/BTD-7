@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Assets.Game.Tower
 {
+    [CreateAssetMenu(fileName = "Unit Spawner Tower", menuName = "Tower/Unit Spawner Tower Definition")]
     public class UnitSpawnerTowerDefinition : TowerDefinition
     {
         [Header("Spawn")]
