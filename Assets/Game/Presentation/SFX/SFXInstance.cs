@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Game.Core.SFX
+namespace Assets.Game.Presentation.SFX
 {
     internal sealed class SFXInstance
     {

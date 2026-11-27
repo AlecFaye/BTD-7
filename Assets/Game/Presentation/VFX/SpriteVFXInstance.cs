@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Game.Core.VFX
+namespace Assets.Game.Presentation.VFX
 {
     internal sealed class SpriteVFXInstance
     {
