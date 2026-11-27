@@ -1,22 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Game.Core.SFX
+namespace Assets.Game.Presentation.VFX
 {
-    internal sealed class SFXPool
+    internal sealed class SpriteVFXPool
     {
-        private readonly SFXDefinition _definition;
+        private readonly SpriteVFXDefinition _definition;
         private readonly Transform _root;
+        private readonly Material _material;
+        private readonly int _sortingLayerId;
 
-        private readonly Stack<SFXInstance> _inactive = new();
-        private readonly List<SFXInstance> _active = new();
+        private readonly Stack<SpriteVFXInstance> _inactive = new();
+        private readonly List<SpriteVFXInstance> _active = new();
 
         private int _created;
 
-        public SFXPool(SFXDefinition definition, Transform root)
+        public SpriteVFXPool(SpriteVFXDefinition definition, Transform root, Material material)
         {
             _definition = definition;
             _root = root;
+            _material = material;
+            _sortingLayerId = SortingLayer.NameToID(definition.SortingLayerName);
         }
 
         public void Prewarm()
@@ -27,21 +31,25 @@ namespace Assets.Game.Core.SFX
                 _inactive.Push(Create());
         }
 
-        private SFXInstance Create()
+        private SpriteVFXInstance Create()
         {
             GameObject go = new(_definition.name);
             go.transform.SetParent(_root, false);
 
-            AudioSource audioSource = go.AddComponent<AudioSource>();
+            SpriteRenderer spriteRenderer = go.AddComponent<SpriteRenderer>();
+            if (_material != null) 
+                spriteRenderer.sharedMaterial = _material;
+            spriteRenderer.sortingLayerID = _sortingLayerId;
+            spriteRenderer.sortingOrder = _definition.SortingOrder;
+            spriteRenderer.enabled = false;
 
             _created++;
-
-            return new SFXInstance(audioSource);
+            return new SpriteVFXInstance(go.transform, spriteRenderer);
         }
 
-        public SFXInstance Spawn()
+        public SpriteVFXInstance Spawn(Vector3 position, float rotationZ, float scale, Transform follow)
         {
-            SFXInstance instance;
+            SpriteVFXInstance instance;
 
             if (_inactive.Count > 0)
             {
@@ -51,7 +59,7 @@ namespace Assets.Game.Core.SFX
             {
                 instance = Create();
             }
-            else if (_definition.Overflow == SFXOverflowPolicy.RecycleOldest && _active.Count > 0)
+            else if (_definition.Overflow == VFXOverflowPolicy.RecycleOldest && _active.Count > 0)
             {
                 instance = _active[0];
                 _active.RemoveAt(0);
@@ -62,20 +70,21 @@ namespace Assets.Game.Core.SFX
                 return null;
             }
 
-            instance.Begin(_definition);
+            instance.Begin(_definition, position, rotationZ, scale, follow);
             _active.Add(instance);
             return instance;
         }
 
-        public void Tick()
+        public void Tick(float deltaTime, float unscaledDeltaTime)
         {
+            float step = _definition.UseUnscaledTime ? unscaledDeltaTime : deltaTime;
             int count = _active.Count;
             int write = 0;
 
             for (int read = 0; read < count; read++)
             {
-                SFXInstance instance = _active[read];
-                if (instance.Tick())
+                SpriteVFXInstance instance = _active[read];
+                if (instance.Tick(step))
                 {
                     _active[write++] = instance;
                 }

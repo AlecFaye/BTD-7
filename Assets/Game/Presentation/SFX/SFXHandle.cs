@@ -1,4 +1,4 @@
-namespace Assets.Game.Core.SFX
+namespace Assets.Game.Presentation.SFX
 {
     public readonly struct SFXHandle
     {

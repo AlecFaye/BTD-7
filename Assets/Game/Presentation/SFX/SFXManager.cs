@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Game.Core.SFX
+namespace Assets.Game.Presentation.SFX
 {
     [DefaultExecutionOrder(100)]
     public class SFXManager : MonoBehaviour

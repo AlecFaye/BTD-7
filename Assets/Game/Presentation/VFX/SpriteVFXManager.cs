@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Game.Core.VFX
+namespace Assets.Game.Presentation.VFX
 {
     [DefaultExecutionOrder(100)]
     public sealed class SpriteVFXManager : MonoBehaviour
