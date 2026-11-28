@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace Assets.Game.Core.Utilities
 {
-    public delegate TItem SelectionStrategy<TItem>(IReadOnlyCollection<TItem> items);
+    public delegate TItem SelectionStrategy<TItem>(IEnumerable<TItem> items);
 
     public static class Registry<TItem>
         where TItem : class
     {
         private static readonly HashSet<TItem> _items = new();
 
-        public static IReadOnlyCollection<TItem> All => _items;
+        public static IEnumerable<TItem> All => _items;
 
         public static bool TryAdd(TItem item)
         {
